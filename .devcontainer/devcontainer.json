@@ -1,0 +1,27 @@
+{
+  "name": "dbt-tutorials",
+  "image": "mcr.microsoft.com/devcontainers/python:3.13",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "dbt-labs.dbt-power-user"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "editor.formatOnSave": true
+      }
+    }
+  },
+  "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh && ~/.cargo/bin/uv pip install dbt-core==1.12.* dbt-postgres dbt-snowflake dbt-bigquery dbt-redshift",
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${localEnv:HOME}${localEnv:USERPROFILE}/.dbt,target=/home/vscode/.dbt,type=bind,consistency=cached"
+  ]
+}
